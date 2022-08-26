@@ -1,0 +1,22 @@
+<div style="color: #1b1b1b; padding: 15px; border: 2px solid #d8d8d8; border-radius: 6px;" id="encabezado">
+    <div>
+        <h1>Experiencia laboral</h1>
+    </div>
+
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item" *ngFor="let experiencia of experiencias">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    {{experiencia.tipoExp}}
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <strong>{{experiencia.tituloExp}}</strong>{{experiencia.descripcionExp}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

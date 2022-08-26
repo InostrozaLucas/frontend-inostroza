@@ -1,0 +1,27 @@
+<div style="color: #1b1b1b; padding: 15px; border: 2px solid #d8d8d8; border-radius: 6px;" id="encabezado">
+    <div>
+        <h1>Habilidades</h1>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col" id="columnas" *ngFor="let habilidades of habilidad"
+                    style="color: #1b1b1b; padding: 15px; border: 2px solid #d8d8d8; border-radius: 6px;" id="tipohab">
+                    <br>
+                    <br>
+                    <h4>{{habilidades.tipoHab}}</h4>
+                    <img src="{{habilidades.fotoHab}}" alt="" id="imaHab">
+                    <br>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="10" style="width: 30%"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

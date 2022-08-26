@@ -1,0 +1,24 @@
+<div style="color: #1b1b1b; padding: 15px; border: 2px solid #d8d8d8; border-radius: 6px;" id="encabezado">
+    <div>
+        <h1>Educación</h1>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col" *ngFor="let education of educations"
+                    style="color: #1b1b1b; padding: 15px; border: 2px solid #d8d8d8; border-radius: 6px;" id="columnas">
+                    <br>
+                    <br>
+                    <h4>{{education.tipoEdu}}</h4>
+                    <p><strong>{{education.tituloEdu}}</strong></p>
+                    <img src="{{education.imagenEdu}}" alt="" id="imgeduc">
+                    <br>
+                    <br>
+                    <div>
+                        <p><strong>{{education.descripcionEdu}}</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

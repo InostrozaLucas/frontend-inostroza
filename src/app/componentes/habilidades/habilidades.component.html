@@ -1,0 +1,239 @@
+<div style="color: #1b1b1b; padding: 15px; border: 2px solid #d8d8d8; border-radius: 6px;" id="encabezado">
+    <div>
+        <h1>Habilidades</h1>
+    </div>
+    <div >
+        <div class="container">
+            <div class="row">
+                <div class="text-center">
+                    <button 
+                    type="button" 
+                    class="btn btn-success" 
+                    (click)="onOpenModal('add')"
+                    data-bs-toggle="modal"
+                    data-bs-target="#addHabilidadesModal">
+                        <a class="nav-link" style="color:aliceblue;"></a>
+                        Añadir habilidades<span class="sr-only">(current)</span>
+                    </button>
+                </div>
+                <div class="col" id="columnas" *ngFor="let habilidades of habilidad" style="color: #1b1b1b; padding: 15px; border: 2px solid #d8d8d8; border-radius: 6px;" id="tipohab">
+                    <div class="text-center">
+                    <a 
+                    (click)="onOpenModal('edit',habilidades)"
+                    class="btn btn-primary" 
+                    data-bs-placement="top" 
+                    data-bs-toggle="modal" 
+                    data-bs-original-title="edit"
+                    data-bs-target="#editHabilidadesModal">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a
+                    (click)="onOpenModal('delete',habilidades)" 
+                    class="btn btn-secondary" 
+                    data-bs-placement="top" 
+                    data-bs-toggle="modal" 
+                    data-bs-original-title="delete"
+                    data-bs-target="#deleteHabilidadesModal">
+                        <i class="fa fa-times"></i>
+                    </a>
+                    </div>
+                    <br>
+                    <br>
+                    <h4>{{habilidades.tipoHab}}</h4>
+                    <img src="{{habilidades.fotoHab}}" alt="" id="imaHab">
+                    <br>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="10" style="width: 30%"></div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+    </div>
+    
+</div>
+<!--Modal boton eliminar-->
+<div 
+class="modal fade" 
+id="deleteHabilidadesModal"
+tabindex="-1" 
+data-bs-target="#deleteHabilidadesModal"
+role="modal-dialog" 
+aria-labelledby="deleteHabilidadesModal" 
+aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteHabilidadesModalLabel">Eliminar habilidad</h5>
+                <button 
+                type="button" 
+                class="btn-close" 
+                data-bs-dismiss="modal" 
+                aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color:white">
+                <p>
+                    Estas seguro de borrar la habilidad?
+                    {{deleteHabilidades?.tipoHab}}
+                </p>
+                <div class="modal-footer">
+                    <button 
+                    type="button" 
+                    class="btn btn-secondary" 
+                    data-bs-dismiss="modal">
+                    No
+                    </button>
+                    <button 
+                    (click)="onDeleteHabilidades(deleteHabilidades!.idHab)" 
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal">
+                    Si
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--Notificación for no employe-->
+<div *ngIf="habilidad?.length==0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">No hay habilidades</h4>
+        <p>No employees were found</p>
+    </div>
+</div>
+<!--Modal boton editar-->
+<div 
+class="modal fade" 
+id="editHabilidadesModal" 
+tabindex="-1" 
+aria-labelledby="editHabilidadesModal"
+aria-hidden="true" 
+data-bs-target="#editHabilidadesModal" 
+role="modal-dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editHabilidadesModal">
+                    Editar habilidades{{editHabilidades?.tipoHab}}
+                </h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #editForm="ngForm">
+                    <div class="form-group">
+                        <input type="hidden" ngModel="{{editHabilidades?.idHab}}" name="idHab" class="form-control" id="idHab" placeholder="" />
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoHab">Tipo de habilidad</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{editHabilidades?.tipoHab}}" 
+                        name="tipoHab" 
+                        class="form-control" 
+                        id="tipoHab"
+                        placeholder="Tipo de habilidad">
+                    </div>
+                    <div class="form-group">
+                        <label for="fotoHab">Imagen</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{editHabilidades?.fotoHab}}" 
+                        name="fotoHab" 
+                        class="form-control" 
+                        id="fotoHab"
+                        placeholder="Imagen">
+                    </div>
+                    <div class="modal-footer">
+                        <button 
+                        type="button" 
+                        id="" 
+                        class="btn btn-secondary" 
+                        data-bs-dismiss="modal">
+                        Cerrar
+                        </button>
+                        <button 
+                        (click)="onUpdateHabilidades(editForm.value)" 
+                        data-bs-dismiss="modal"
+                        class="btn btn-primary">
+                        Guardar cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal añadir educación-->
+<div 
+class="modal fade" 
+id="addHabilidadesModal" 
+tabindex="-1" 
+role="modal-dialog" 
+aria-labelledby="addHabilidadesModalLabel"
+aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addHabilidadesModalLabel">Añadir habilidades</h5>
+                <button 
+                type="button" 
+                class="close" 
+                data-bs-dismiss="modal" 
+                aria-label="close">
+                    <span aria-hidden="false">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #addForm="ngForm" (ngSubmit)="onAddHabilidades(addForm)">
+                    <div class="form-group">
+                        <label for="tipoHab">Tipo de habilidad</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{editHabilidades?.tipoHab}}"
+                        name="tipoHab" 
+                        class="form-control" 
+                        id="tipoHab"
+                        placeholder="Tipo de habilidad" 
+                        required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fotoHab">Imagen</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{editHabilidades?.fotoHab}}"
+                        name="fotoHab"
+                        class="form-control" 
+                        id="fotoHab"
+                        placeholder="Imagen" 
+                        required>
+                    </div>
+                    <div class="modal-footer">
+                        <button 
+                        type="button" 
+                        id="add-habilidades-form" 
+                        class="btn btn-secondary" 
+                        data-bs-dismiss="modal">
+                        Cerrar
+                        </button>
+                        <button 
+                        [disabled]="addForm.invalid" 
+                        type="submit" 
+                        class="btn btn-primary">
+                        Añadir cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>

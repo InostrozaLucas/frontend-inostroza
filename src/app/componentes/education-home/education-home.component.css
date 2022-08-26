@@ -1,0 +1,19 @@
+h1 {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+}
+
+#imgeduc {
+    border-radius: 100%;
+    width: 50%;
+}
+
+#encabezado {
+    background-image: url(https://p4.wallpaperbetter.com/wallpaper/425/590/376/programming-programming-language-knowledge-coding-code-minimalism-computer-logic-doom-game-wallpaper-preview.jpg);
+}
+
+#columnas {
+    background-color: rgb(255, 255, 255);
+}
